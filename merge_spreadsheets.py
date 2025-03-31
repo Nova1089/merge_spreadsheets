@@ -29,13 +29,13 @@ def create_timestamp():
 
 # main
 show_intro()
-dataFrame1 = import_excel_file()
-dataFrame2 = import_excel_file()
-leftField = input("Specify the field in the left spreadsheet to join on: ")
-rightField = input("Specify the field on the right spreadsheet to join on: ")
+dataFrameLeft = import_excel_file()
+dataFrameRight = import_excel_file()
+leftField = input("Specify the field in the left side spreadsheet to join on: ")
+rightField = input("Specify the field on the right side spreadsheet to join on: ")
 joinType = input("Specify the join type. Valid options are: left, right, outer, inner, cross: ")
 # pandas.merge: https://pandas.pydata.org/docs/reference/api/pandas.merge.html
-combinedFrame = pd.merge(left=dataFrame1, right=dataFrame2, left_on=leftField, right_on=rightField, how=joinType)
+combinedFrame = pd.merge(left=dataFrameLeft, right=dataFrameRight, left_on=dataFrameLeft[leftField].str.lower(), right_on=dataFrameRight[rightField].str.lower(), how=joinType)
 print("Spreadsheets have been combined")
 outputName = input("Enter output file name (without the file extension): ")
 timestamp = create_timestamp()
